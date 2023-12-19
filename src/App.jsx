@@ -1,5 +1,7 @@
+import config from './config/config';
+
 function App() {
-	console.log(import.meta.env.VITE_APPWRITE_URL);
+	console.log(config.appWriteUrl);
 	return (
 		<>
 			<h2>Blog app with appWrite</h2>
