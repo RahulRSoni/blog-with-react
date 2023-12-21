@@ -13,6 +13,7 @@ function Login() {
 	const [error, setError] = useState('');
 
 	const login = async (data) => {
+		console.log(data);
 		setError('');
 		try {
 			const session = await authServices.logIn(data);
@@ -64,6 +65,17 @@ function Login() {
 								},
 							})}
 						/>
+						<Input
+							label='Password'
+							type='password'
+							placeholder='Enter your password'
+							{...register('password', { required: true })}
+						/>
+						<Button
+							type='submit'
+							className='w-full'>
+							Sign In
+						</Button>
 					</div>
 				</from>
 			</div>
