@@ -11,8 +11,9 @@ import RTE from './RTE/RTE.jsx';
 import Signup from './From/SignUp.jsx';
 import Login from './From/Login.jsx';
 import PostForm from './Post-form/PostForm.jsx';
+import Protected from './AuthLayout.jsx';
 
-PostForm
+PostForm;
 export {
 	Card,
 	Input,
@@ -27,4 +28,5 @@ export {
 	Signup,
 	Login,
 	PostForm,
+	Protected,
 };
