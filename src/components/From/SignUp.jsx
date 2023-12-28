@@ -12,7 +12,7 @@ function Signup() {
 	const dispatch = useDispatch();
 	const { register, handleSubmit } = useForm();
 
-	const createUser = async (data) => {
+	const create = async (data) => {
 		console.log(data);
 		setError('');
 		try {
@@ -47,7 +47,7 @@ function Signup() {
 						</Link>
 					</p>
 					{error && <p className='text-red-500 mt-8 text-center'>{error}</p>}
-					<from
+					<form
 						onSubmit={handleSubmit(create)}
 						className='mt-8'>
 						<div className='space-y-5'>
@@ -85,7 +85,7 @@ function Signup() {
 								Create Account
 							</Button>
 						</div>
-					</from>
+					</form>
 				</div>
 			</div>
 		</div>
