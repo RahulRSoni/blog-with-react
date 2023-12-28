@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { services } from 'appwrite/types/service';
+import services from '../appwrite_backend/dbService.js';
 import { Container, Card } from '../components/index.js';
 
 function Home() {
