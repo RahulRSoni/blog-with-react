@@ -3,17 +3,17 @@ import services from '../appwrite_backend/dbService.js';
 import { Container, Card } from '../components/index.js';
 
 function Home() {
-	const [post, setPost] = useState([]);
+	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
-		services.getPost().then((posts) => {
-			if (posts) {
-				setPost(posts.documents);
+		services.getPost(posts).then((post) => {
+			if (post) {
+				setPosts(post.documents);
 			}
 		});
 	}, []);
 
-	if (post.length === 0) {
+	if (posts.length === 0) {
 		return (
 			<div className='w-full py-8 mt-4 text-center'>
 				<Container>
@@ -32,13 +32,13 @@ function Home() {
 			<div className='w-full py-8'>
 				<Container>
 					<div className='flex flex-wrap'>
-						{post.map((post) => {
+						{posts.map((post) => (
 							<div
 								key={post.$id}
 								className='p-2 w-1/4'>
 								<Card {...post} />
-							</div>;
-						})}
+							</div>
+						))}
 					</div>
 				</Container>
 			</div>

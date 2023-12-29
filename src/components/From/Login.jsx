@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { logIn as authLogin } from '../../store/authSlice.js';
+import { logIn } from '../../store/authSlice.js';
 import { Button, Logo, Input } from '../index.js';
 import { useDispatch } from 'react-redux';
-import authServices from '../../appwrite_backend/authService.js';
 import { useForm } from 'react-hook-form';
+import authServices from '../../appwrite_backend/authservice.js';
 
 function Login() {
 	const navigate = useNavigate();
@@ -14,12 +14,15 @@ function Login() {
 
 	const login = async (data) => {
 		console.log(data);
-		setError('');
 		try {
 			const session = await authServices.logIn(data);
+
+			console.log('Section:', session);
+			
 			if (session) {
 				const userData = await authServices.getCurrentUser();
-				if (userData) dispatch(authLogin(userData));
+				console.log('UserData:', userData);
+				if (userData) dispatch(logIn(userData));
 				navigate('/');
 			}
 		} catch (error) {
@@ -48,11 +51,11 @@ function Login() {
 					</Link>
 				</p>
 				{error && <p className='text-red-500 mt-8 text-center'>{error}</p>}
-				<from
+				<form
 					onSubmit={handleSubmit(login)}
 					className='mt-8'>
 					<div className='space-y-5'>
-						<input
+						<Input
 							label='Email:'
 							placeholder='Enter Your email Id'
 							type='email'
@@ -77,7 +80,7 @@ function Login() {
 							Sign In
 						</Button>
 					</div>
-				</from>
+				</form>
 			</div>
 		</div>
 	);

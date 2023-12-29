@@ -3,11 +3,11 @@ import services from '../appwrite_backend/dbService';
 import { Container, Card } from '../components/index';
 
 function AllPost() {
-	const [post, setPost] = useState([]);
+	const [posts, setPosts] = useState([]);
 	useEffect(() => {
-		services.getPost([]).then((posts) => {
-			if (posts) {
-				setPost(posts.documents);
+		services.getPost([]).then((post) => {
+			if (post) {
+				setPosts(post.documents);
 			}
 		});
 	}, []);
@@ -16,11 +16,11 @@ function AllPost() {
 		<div className='w-full py-8'>
 			<Container>
 				<div className='flex flex-wrap'>
-					{post.map((post) => (
+					{posts.map((post) => (
 						<div
 							key={post.$id}
 							className='p-2 w-1/4'>
-							<Card post={post} />
+							<Card {...post} />
 						</div>
 					))}
 				</div>

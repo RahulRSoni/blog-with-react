@@ -7,7 +7,7 @@ import Button from './Button/Button.jsx';
 import Input from './Input/Input.jsx';
 import Select from './Select/Select.jsx';
 import Card from './Cards/Card.jsx';
-import RTE from './RTE/RTE.jsx';
+import RealTimeEditor from './RealTimeEditor/RealTimeEditor.jsx';
 import Signup from './From/SignUp.jsx';
 import Login from './From/Login.jsx';
 import PostForm from './Post-form/PostForm.jsx';
@@ -21,10 +21,10 @@ export {
 	Footer,
 	Header,
 	Container,
+	RealTimeEditor,
 	Logo,
 	LogoutBtn,
 	Select,
-	RTE,
 	Signup,
 	Login,
 	PostForm,

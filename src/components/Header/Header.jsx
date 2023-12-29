@@ -1,30 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Logo, LogoutBtn } from '../index';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 function Header() {
-	const authStatus = useSelector((state) => {
-		state.status;
-	});
+	const authStatus = useSelector((state) => state.status);
 	const navigate = useNavigate();
 
 	const navItem = [
 		{ name: 'Home', slug: '/', active: true },
 		{ name: 'Login', slug: '/login', active: !authStatus },
 		{ name: 'Signup', slug: '/signup', active: !authStatus },
-		{ name: 'All Post', slug: '/all-posts', active: !authStatus },
-		{ name: 'Add post', slug: '/add-post', active: !authStatus },
+		{ name: 'All Post', slug: '/all-posts', active: authStatus },
+		{ name: 'Add post', slug: '/add-post', active: authStatus },
 	];
 
 	return (
-		<header className='py-3 shadow bg-gray-500'>
+		<header className='py-2 shadow bg-gray-500'>
 			<Container>
-				<nav className='flex'>
-					<div className='mr-4'>
+				<nav className='flex align-middle'>
+					<div>
 						<Link to='/'>
-							<Logo width='70px' />
+							<Logo />
 						</Link>
 					</div>
 					<ul className='flex ml-auto'>

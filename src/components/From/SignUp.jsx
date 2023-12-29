@@ -31,10 +31,10 @@ function Signup() {
 	return (
 		<div className='flex items-center justify-center'>
 			<div className='mx-auto w-full max-w-lg bg-gray-100 rounded-xl px-10 border border-black/10'>
-				<div className='mb-2 flex justify-center'>
-					<span className='inline-block w-full max-w-[100px]'>
-						<Logo width='100%' />
-					</span>
+				<div className='mb-2 flex justify-center flex-col'>
+					<div className='ml-36'>
+						<Logo />
+					</div>
 					<h2 className='text-center text-2xl font-bold leading-tight'>
 						Sign up to create account
 					</h2>
@@ -51,7 +51,7 @@ function Signup() {
 						onSubmit={handleSubmit(create)}
 						className='mt-8'>
 						<div className='space-y-5'>
-							<input
+							<Input
 								label='Full Name:'
 								placeholder='Enter Your full name'
 								type='text'
@@ -59,7 +59,7 @@ function Signup() {
 									required: true,
 								})}
 							/>
-							<input
+							<Input
 								label='Email:'
 								placeholder='Enter Your email Id'
 								type='email'
