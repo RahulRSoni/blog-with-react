@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Input, Select, RealTimeEditor } from '../index';
-import appwriteServices from '../../appwrite_backend/dbService';
+import services from '../../appwrite_backend/dbService';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const PostForm = ({ post }) => {
-	console.log(post);
+	// console.log(post);
 	const navigate = useNavigate();
 	const userData = useSelector((state) => state.userData);
 
@@ -17,34 +17,35 @@ const PostForm = ({ post }) => {
 				slug: post?.slug || '',
 				content: post?.content || '',
 				status: post?.status || 'active',
-				featuredImage: '',
+				featuredImage: post?.featuredImage || '',
 			},
 		});
 	const submit = async (data) => {
 		if (post) {
 			const file = data.image[0]
-				? await appwriteServices.uploadFile(data.image[0])
+				? await services.uploadFile(data.image[0])
 				: null;
 
 			if (file) {
-				await appwriteServices.deleteFile(post.featuredImage);
+				await services.deleteFile(file.$id);
 			}
-			const dbPost = await appwriteServices.updatePost(post.$id, {
+			const dbPost = await services.updatePost(post.$id, {
 				...data,
 				featuredImage: file ? file.$id : undefined,
 			});
+
 			if (dbPost) {
 				navigate(`/post/${dbPost.$id}`);
 			}
 		} else {
 			const file = data.image[0]
-				? await appwriteServices.uploadFile(data.image[0])
+				? await services.uploadFile(data.image[0])
 				: null;
 
 			if (file) {
 				const fileId = file.$id;
 				data.featuredImage = fileId;
-				const dbPost = await appwriteServices.createPost({
+				const dbPost = await services.createPost({
 					...data,
 					userId: userData.$id,
 				});
@@ -87,9 +88,10 @@ const PostForm = ({ post }) => {
 				<Input
 					label='Slug :'
 					placeholder='Slug'
+					name='slug'
 					{...register('slug', { required: true })}
 					onInput={(e) => {
-						setValue('slug', slugTransform(e.currentTarget.value), {
+						setValue('slug', slugTransform(e.target.value), {
 							shouldValidate: true,
 						});
 					}}
@@ -111,7 +113,7 @@ const PostForm = ({ post }) => {
 				{post && (
 					<div className='w-full mb-4'>
 						<img
-							src={appwriteServices.getFilePreview(post.featuredImage)}
+							src={services.getFilePreview(post.featuredImage)}
 							alt={post.title}
 							className='rounded-lg'
 						/>
